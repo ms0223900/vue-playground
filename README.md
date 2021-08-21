@@ -1,5 +1,8 @@
 # vue-playground
 
+## Introduction
+主要用來測試一些共用組件與嘗試新的寫法
+
 ## Project setup
 ```
 yarn install
