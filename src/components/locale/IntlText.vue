@@ -5,12 +5,12 @@
 </template>
 
 <script lang="ts">
-import { PropType } from 'vue';
+import { computed, PropType, defineComponent } from 'vue';
 import {
   defaultLocale, LocaleKey, LocaleMessageKey, messages,
 } from '../../locale/index';
 
-export default {
+export default defineComponent({
   name: 'IntlText',
   props: {
     langKey: {
@@ -35,15 +35,23 @@ export default {
       messages,
     });
   },
+  // setup(props, context) {
+  //   const localeContent = computed(() => {
+  //     const defaultMessage = messages[props.defaultLocale][this.langKey] || this.langKey;
+
+  //     if (!this.$t) return defaultMessage;
+  //     return this.$t(this.langKey, this.variables);
+  //   })
+  // }
   computed: {
     localeContent(): string {
-      const defaultMessage = messages[this.defaultLocale][this.langKey] || this.langKey;
+      const defaultMessage = messages[this.$props.defaultLocale][this.langKey] || this.langKey;
 
       if (!this.$t) return defaultMessage;
-      return this.$t(this.langKey, this.variables);
+      return this.$t(this.langKey, this.$props.variables);
     },
   },
-};
+});
 </script>
 
 <style>
