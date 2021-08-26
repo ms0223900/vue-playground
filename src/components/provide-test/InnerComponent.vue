@@ -1,6 +1,6 @@
 <template>
   <input :value="valFromWrapper.value"
-  @change="valFromWrapper = $event.target.value" />
+  @input="$e => updateValFromWrapper($e.target.value)" />
   <input
     :value="innerVal"
     @change="innerVal = $event.target.value"
@@ -17,6 +17,7 @@ export default {
   },
   inject: [
     'valFromWrapper',
+    'updateValFromWrapper',
   ],
 };
 </script>
