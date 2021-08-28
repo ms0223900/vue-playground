@@ -6,7 +6,9 @@
       :numItemProps="{
         numNow: num,
         addedCount,
-        numTransitionTimeSec,
+        numTransitionTimeSec: (addedIdx === addedCount) ? numTransitionTimeSec : (
+          numTransitionTimeSec * (10 ** (parsedNumList.length - i - 1))
+        ),
         digit: parsedNumList.length - i
       }"
     />
@@ -42,6 +44,10 @@ export const getNumTransitionTimeSec = (wholeTransitionSec = 0.2, addedCount = 1
   return (wholeTransitionSec * (1 + multi)) / addedCount;
 };
 
+export const splitNum = (num: number) => (
+  String(num).split('').map((c) => Number(c))
+);
+
 export default defineComponent({
   components: { NumItem },
   name: 'NumList',
@@ -59,21 +65,24 @@ export default defineComponent({
     const addedCount = computed(() => (
       props.numListProps.addedCount
     ));
-    const parsedNumList = computed(() => String(nextCount.value).split('').map((c) => Number(c)));
+    const parsedNumList = computed(() => (
+      splitNum(nextCount.value)
+    ));
     const numTransitionTimeSec = ref((
       getNumTransitionTimeSec(defaultSingleNumTransitionSec, props.numListProps.addedCount)
     ));
 
+    const addedIdx = ref(0);
     watch([count, addedCount], () => {
-      let addedIdx = 0;
+      addedIdx.value = 0;
       (async () => {
         for await (const el of Array(addedCount.value).fill(0)) {
-          addedIdx += 1;
+          addedIdx.value += 1;
           await asyncTimeoutCb(() => {
             nextCount.value += 1;
           }, numTransitionTimeSec.value);
           numTransitionTimeSec.value = getNumTransitionTimeSec(
-            defaultSingleNumTransitionSec, props.numListProps.addedCount, addedIdx,
+            defaultSingleNumTransitionSec, props.numListProps.addedCount, addedIdx.value,
           );
         }
       })();
@@ -83,6 +92,7 @@ export default defineComponent({
       ...toRefs(props.numListProps),
       parsedNumList,
       addedCount,
+      addedIdx,
       numTransitionTimeSec,
     });
   },

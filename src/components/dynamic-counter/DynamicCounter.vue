@@ -32,7 +32,7 @@ export default defineComponent({
     // },
   },
   setup(props) {
-    const countForAdding = getRandomNum(1, 20);
+    const countForAdding = getRandomNum(50, 50);
     const count = ref(initCount);
 
     const handleAddCount = () => {

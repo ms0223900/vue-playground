@@ -39,17 +39,15 @@ export default defineComponent({
     const nextNum = ref(1);
 
     watch([numNow], () => {
-      // const { addedCount, digit } = props.numItemProps;
-
       (async () => {
         const { numTransitionTimeSec } = props.numItemProps;
+        nextNum.value = getNextNum(_numNow.value);
         numItemWrapperStyle.value = {
           transition: `${numTransitionTimeSec}s`,
           top: '-40px',
         };
 
         await asyncTimeoutCb(() => {
-          nextNum.value = getNextNum(_numNow.value);
           _numNow.value = numNow.value;
           numItemWrapperStyle.value = {
             top: '0px',
