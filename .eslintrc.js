@@ -12,7 +12,9 @@ module.exports = {
     ecmaVersion: 2020,
   },
   rules: {
+    'max-len': 0,
     indent: 0,
+    
     '@typescript-eslint/indent': ['warn', 2],
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
