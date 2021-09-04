@@ -51,7 +51,7 @@ export default defineComponent({
           _numNow.value = numNow.value;
           numItemWrapperStyle.value = {
             top: '0px',
-            transition: 'unset',
+            // transition: 'unset',
           };
         }, numTransitionTimeSec);
       })();
