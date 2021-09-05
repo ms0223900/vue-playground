@@ -22,7 +22,7 @@ import {
 
 import * as vueRef from 'vue';
 import NumList from './NumList.vue';
-import usePlocState from './usePlocState';
+import usePlocState from '../ploc-state-sample/usePlocState';
 import DynamicCounterPlocState, { DynamicCounterState } from './DynamicCounterState';
 
 export const getRandomNum = (min = 1, max = 20) => (
@@ -32,6 +32,7 @@ export const getRandomNum = (min = 1, max = 20) => (
 const initState: DynamicCounterState = {
   count: 0,
   countDigit: 0,
+  othterCount: 0,
 };
 
 export default defineComponent({
@@ -51,13 +52,14 @@ export default defineComponent({
     };
 
     function getCountDigit(s: DynamicCounterState) {
+      console.log('get count digit');
       return String(s.count).length;
     }
 
     ploc.addlistener(watchCountListener);
     ploc.addlistener((s) => ({
       digitCount: getCountDigit(s),
-    }));
+    }), (s) => [s.othterCount]);
 
     return ({
       // count,

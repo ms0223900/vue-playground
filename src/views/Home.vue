@@ -5,25 +5,40 @@
     <intl-text langKey="hello" />
     <DynamicCounter />
     <recursive-list />
-    <TodoListContainer />
+    <ploc-todo-list-container :count="count" />
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, onMounted, ref } from 'vue';
 import HelloWorld from '@/components/HelloWorld.vue'; // @ is an alias to /src
 import IntlText from '@/components/locale/IntlText.vue';
 import RecursiveList from '@/components/recursive-render/RecursiveList.vue';
 import TodoListContainer from '@/components/test-toRefs-sample/TodoListContainer.vue';
 import DynamicCounter from '@/components/dynamic-counter/DynamicCounter.vue';
+import PlocTodoListContainer from '@/components/ploc-state-sample/PlocTodoListContainer.vue';
 
 export default defineComponent({
   name: 'Home',
+  setup() {
+    const count = ref(1);
+
+    onMounted(() => {
+      setInterval(() => {
+        count.value += 1;
+      }, 1000);
+    });
+
+    return ({
+      count,
+    });
+  },
   components: {
     IntlText,
     RecursiveList,
-    TodoListContainer,
+    // TodoListContainer,
     DynamicCounter,
+    PlocTodoListContainer,
   },
 });
 </script>

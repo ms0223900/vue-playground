@@ -1,6 +1,6 @@
 <template>
   <TodoItem
-    v-for="(todo) in (todoListData)"
+    v-for="(todo) in (todoListProps.todoListData)"
     :key="todo.id"
     :todoItemProps="reactive(todo)"
     @update:checkbox="$emit('update:checkbox', todo.id)"

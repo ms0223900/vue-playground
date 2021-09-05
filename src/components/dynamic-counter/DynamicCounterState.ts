@@ -1,8 +1,9 @@
-import PlocState from './PlocState';
+import PlocState from '../ploc-state-sample/PlocState';
 
 export interface DynamicCounterState extends Record<string, unknown> {
   count: number
   countDigit: number
+  othterCount: number
 }
 
 class DynamicCounterPlocState extends PlocState<DynamicCounterState> {
