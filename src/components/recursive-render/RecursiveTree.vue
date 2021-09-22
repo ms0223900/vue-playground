@@ -17,17 +17,20 @@
       </div>
     </div>
     <div v-show="isOpen">
-      <recursive-tree
+      <RecursiveTree
         v-for="(_node, i) in node.children"
         :key="`${_node.level}-${i}`"
         :node="_node"
         :ref="setListRefs"
+        @select-node="(nodePath, newChecked) => $emit('select-node', nodePath, newChecked)"
       />
     </div>
   </div>
 </template>
 
 <script lang="ts">
+/* eslint-disable no-unused-expressions */
+
 import Vue, {
   computed, defineComponent, onBeforeUpdate, ref,
 } from 'vue';
@@ -35,8 +38,8 @@ import useSetListRef from './useSetListRef';
 
 export default defineComponent({
   name: 'RecursiveTree',
-  props: ['node'],
-  setup(props) {
+  props: ['node', 'id'],
+  setup(props, { emit }) {
     const isChildrenEmpty = computed(() => props.node.children.length === 0);
 
     const checked = ref(false);
@@ -58,14 +61,22 @@ export default defineComponent({
       isOpen.value = !isOpen.value;
     };
 
-    const handleChecked = () => {
-      checked.value = !checked.value;
+    const handleChecked = (toggle?: boolean) => {
+      const newToggle = typeof toggle === 'boolean' ? toggle : !checked.value;
+      checked.value = newToggle;
+      const {
+        meta: { originPath },
+        children,
+      } = props.node;
+      children.length === 0 && emit('select-node', originPath, newToggle);
     };
 
-    const handleRecursiveToggle = () => {
-      handleChecked();
+    const handleRecursiveToggle = (toggle?: boolean) => {
+      handleChecked(toggle);
       listRefs.value.forEach((el) => {
-        if (el && el.handleRecursiveToggle) el.handleRecursiveToggle();
+        if (el && el.handleRecursiveToggle) {
+          el.handleRecursiveToggle(checked.value);
+        }
       });
     };
 
@@ -90,6 +101,10 @@ export default defineComponent({
 
   methods: {
   },
+
+  emits: [
+    'select-node',
+  ],
 });
 </script>
 
