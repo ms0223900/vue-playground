@@ -14,7 +14,7 @@ module.exports = {
   rules: {
     'max-len': 0,
     indent: 0,
-    
+
     'no-useless-constructor': 0,
     'no-underscore-dangle': 0,
     '@typescript-eslint/indent': ['warn', 2],
