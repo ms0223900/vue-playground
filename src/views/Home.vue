@@ -1,11 +1,11 @@
 <template>
   <div class="home">
-    <HelloWorld />
     <!-- <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/> -->
     <intl-text langKey="hello" />
     <DynamicCounter />
     <recursive-list />
     <ploc-todo-list-container :count="count" />
+    <file-drag-drop-part />
   </div>
 </template>
 
@@ -17,6 +17,7 @@ import RecursiveList from '@/components/recursive-render/RecursiveList.vue';
 import TodoListContainer from '@/components/test-toRefs-sample/TodoListContainer.vue';
 import DynamicCounter from '@/components/dynamic-counter/DynamicCounter.vue';
 import PlocTodoListContainer from '@/components/ploc-state-sample/PlocTodoListContainer.vue';
+import FileDragDropPart from '@/components/file-drag-drop/FileDragDropPart.vue';
 
 export default defineComponent({
   name: 'Home',
@@ -34,12 +35,15 @@ export default defineComponent({
     });
   },
   components: {
-    HelloWorld,
+    // HelloWorld,
     IntlText,
     RecursiveList,
     // TodoListContainer,
     DynamicCounter,
     PlocTodoListContainer,
+    FileDragDropPart,
   },
 });
 </script>
+,
+    FileDragDropPart
