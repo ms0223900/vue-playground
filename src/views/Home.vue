@@ -6,6 +6,7 @@
     <recursive-list />
     <ploc-todo-list-container :count="count" />
     <file-drag-drop-part />
+    <scroll-trigger-part />
   </div>
 </template>
 
@@ -18,6 +19,7 @@ import TodoListContainer from '@/components/test-toRefs-sample/TodoListContainer
 import DynamicCounter from '@/components/dynamic-counter/DynamicCounter.vue';
 import PlocTodoListContainer from '@/components/ploc-state-sample/PlocTodoListContainer.vue';
 import FileDragDropPart from '@/components/file-drag-drop/FileDragDropPart.vue';
+import ScrollTriggerPart from '@/components/scroll-trigger/ScrollTriggerPart.vue';
 
 export default defineComponent({
   name: 'Home',
@@ -42,8 +44,10 @@ export default defineComponent({
     DynamicCounter,
     PlocTodoListContainer,
     FileDragDropPart,
+    ScrollTriggerPart,
   },
 });
 </script>
 ,
-    FileDragDropPart
+    FileDr,
+    ScrollTriggerPartagDropPart
