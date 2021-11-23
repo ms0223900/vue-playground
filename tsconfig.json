@@ -33,7 +33,7 @@
     "src/**/*.vue",
     "tests/**/*.ts",
     "tests/**/*.tsx"
-  ],
+, "src/components/service-worker-mock-server/index.js"  ],
   "exclude": [
     "node_modules"
   ]

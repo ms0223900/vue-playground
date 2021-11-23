@@ -13,6 +13,11 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import('../components/provide-test/ProvideTest.vue'),
   },
   {
+    path: '/sw-proxy',
+    name: 'SWProxyTest',
+    component: () => import('../components/service-worker-mock-server/TestGetSWProxyData.vue'),
+  },
+  {
     path: '/about',
     name: 'About',
     // route level code-splitting
